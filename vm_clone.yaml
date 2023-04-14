@@ -1,0 +1,119 @@
+---
+- name: Vmware Virtual Machine Creation from Template
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  # vars:
+  #   varname: Wakanda_Ubuntu_01
+
+  collections:
+    - community.vmware
+
+  tasks:
+    - name: Include Secret Environment Items
+      ansible.builtin.include_vars:
+        file: secrets.yml
+        name: secret
+
+    - name: Include new vm data
+      ansible.builtin.include_vars:
+        file: newvm_data.yml
+        name: newvm_data
+
+    - name: Gather disk info from virtual machine using name
+      community.vmware.vmware_guest_disk_info:
+        hostname: "{{ secret.vcenter_hostname }}"
+        username: "{{ secret.vcenter_username }}"
+        password: "{{ secret.vcenter_password }}"
+        validate_certs: false
+        name: "{{ item.template_name }}"
+        datacenter: "{{ item.template_datacenter }}"
+      delegate_to: localhost
+      register: template_disk_info
+      loop: "{{ newvm_data.newvms }}"
+
+    - name: Set facts VM template disk info (Added spaces in jinja)
+      ansible.builtin.set_fact:
+        diskinfo: "{{ diskinfo | default([]) + \
+            [{ \
+              'name': item.invocation.module_args.name, \
+               'capacity_in_bytes': item.guest_disk_info['0'].capacity_in_bytes, \
+               'capacity_in_kb': item.guest_disk_info['0'].capacity_in_kb \
+            }] \
+          }}"
+      loop: "{{ template_disk_info.results }}"
+
+    # - name: Print disk info
+    #   ansible.builtin.debug:
+    #   # msg: "{{ diskinfo | json_query('@[?name==`%s`].capacity_in_kb' % (varname)) }}" 
+    #     msg: "{{ (diskinfo | json_query('@[?name==`{}`].capacity_in_kb'.format(varname)))[0] }}" # | int
+
+    - name: Create a virtual machine from a template
+      community.vmware.vmware_guest:
+        hostname: "{{ secret.vcenter_hostname }}"
+        username: "{{ secret.vcenter_username }}"
+        password: "{{ secret.vcenter_password }}"
+        validate_certs: false
+        template: "{{ item.template_name }}"
+        name: "{{ item.new_vm_name }}"
+        state: poweredon
+        datacenter: "{{ item.new_vm_datacenter }}"
+        cluster: "{{ item.new_vm_cluster }}"
+        folder: "{{ item.new_vm_folder }}"
+        disk:
+          - datastore: "{{ item.new_vm_datastore }}"
+            size_kb: "{{ (diskinfo | json_query('@[?name==`{}`].capacity_in_kb'.format(item.template_name)))[0] }}"
+            type: thin
+        hardware:
+          memory_mb: "{{ item.new_vm_memory_mb }}"
+          num_cpus: "{{ item.new_vm_cpu }}"
+          num_cpu_cores_per_socket: "{{ item.new_vm_cpu_cores_per_socket }}"
+        networks:
+          - name: "{{ item.new_vm_network }}"
+            connected: true
+            start_connected: true
+        wait_for_ip_address: true
+      delegate_to: localhost
+      register: deploy
+      loop: "{{ newvm_data.newvms }}"
+
+    - name: Gather information of Virtual Machine
+      community.vmware.vmware_guest_info:
+        hostname: "{{ secret.vcenter_hostname }}"
+        username: "{{ secret.vcenter_username }}"
+        password: "{{ secret.vcenter_password }}"
+        validate_certs: false
+        datacenter: "{{ item.new_vm_datacenter }}"
+        name: "{{ item.new_vm_name }}"
+        # schema: "vsphere"
+        # properties: ["config.hardware.memoryMB", "guest.disk", "overallStatus"]
+      delegate_to: localhost
+      register: vm_info
+      loop: "{{ newvm_data.newvms }}"
+
+    - name: Set facts VM info
+      ansible.builtin.set_fact:
+        eth_info: "{{ eth_info | default([]) + \
+            [{ \
+              'name': item.invocation.module_args.name, \
+              'eth0_name': item.instance.hw_eth0.label, \
+              'eth0_mac': item.instance.hw_eth0.macaddress, \
+              'eth0_mac_dash': item.instance.hw_eth0.macaddress_dash \
+            }] \
+          }}"
+      loop: "{{ vm_info.results }}"
+
+    - name: Set ethernet adapter to connected and start_connected on new VM
+      community.vmware.vmware_guest_network:
+        hostname: "{{ secret.vcenter_hostname }}"
+        username: "{{ secret.vcenter_username }}"
+        password: "{{ secret.vcenter_password }}"
+        validate_certs: false
+        datacenter: "{{ item.new_vm_datacenter }}"
+        name: "{{ item.new_vm_name }}"
+        mac_address: "{{ (eth_info | json_query('@[?name==`{}`].eth0_mac'.format(item.new_vm_name)))[0] }}"
+        state: present
+        start_connected: true
+        connected: true
+      loop: "{{ newvm_data.newvms }}"
