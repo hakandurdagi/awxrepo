@@ -1,8 +1,9 @@
 ---
-- name: Create a VM from a template
-  hosts: localhost
-  gather_facts: no
+- hosts: all
+  become: yes
   tasks:
+- name: Create a VM from a template
+  gather_facts: no
   - name: Clone the template
     vmware_guest:
       hostname: "{{ vcenter_ip }}"
@@ -10,9 +11,9 @@
       password: "{{ vcenter_password }}"
       validate_certs: False
       name: testvm_2
-      template: template_el7
+      template: Template_Windows_SRV2022_Local
       datacenter: "{{ datacenter_name }}"
-      folder: /DC1/vm
+      folder: /deployed_vm
       state: poweredon
       cluster: "{{ cluster_name }}"
       wait_for_ip_address: yes
