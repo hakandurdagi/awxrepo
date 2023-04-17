@@ -1,3 +1,4 @@
+---
 newvms:
 - {
     template_name: Template_Windows_SRV2022_Local,
