@@ -7,20 +7,20 @@
 		hostname: "{{ vcenter_hostname }}"
 		username: "{{ vcenter_username }}"
 		password: "{{ vcenter_password }}"
-		folder: /testvms
+		folder: /deployed_vm
 		name: testvm_2
 		state: poweredon
-		template: template_el7
+		template: Template_Windows_SRV2022_Local
 		disk:
-		- size_gb: 10
+		- size_gb: 60
 		type: thin
-		datastore: g73_datastore
+		datastore: VxRail-Virtual-SAN-Datastore-67966368-ff9e-4875-9f72-ad5aef3e42a3
 		# Add another disk from an existing VMDK
 		- filename: "[datastore1] testvms/testvm_2_1/testvm_2_1.vmdk"
 		hardware:
-		memory_mb: 512
-		num_cpus: 6
-		num_cpu_cores_per_socket: 3
+		memory_mb: 4096
+		num_cpus: 4
+		num_cpu_cores_per_socket: 2
 		scsi: paravirtual
 		memory_reservation_lock: true
 		mem_limit: 8096
