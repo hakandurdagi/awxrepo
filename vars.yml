@@ -4,7 +4,7 @@ vcenter_datacenter: "VxRail-Datacenter"
 vcenter_validate_certs: false
 vcenter_username: "administrator@vsphere.local"
 vcenter_password: "DeFacto1454!!"
-vm_name: "ansibledeploy"
+vm_name: "test01"
 vcenter_destination_folder: "deployed_vm"
 vm_state: "poweroff"
 vm_template: "Template_Windows_SRV2022_Local"
