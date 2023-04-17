@@ -1,4 +1,3 @@
-
 ---
 - name: Create a new virtual machine {{ hostname }} on vCenter {{ vcenter_hostname }} from template {{ source_template }}
   community.vmware.vmware_guest:
