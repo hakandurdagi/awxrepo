@@ -1,7 +1,14 @@
 ---
-- name: Add the user 'johnd' with a specific uid and a primary group of 'admin'
-  ansible.builtin.user:
-    name: johnd
-    comment: John Doe
-    uid: 1040
-    group: admin
+- hosts: all
+  become: yes
+  tasks:
+    - name: Kullanıcı Ekle
+      user:
+        name: pardus
+        password: "$6$Hw5kMc7sajWMmYvY$av9018zEIyGLbBKoGgAl3Zj1GBkDpkHJm77Mxw07b765R/B17uQcHxqoGGJIjvirBclzgJJpzl3FOYV/GuX6u/"
+        comment: Pardus Kullanıcısı
+        shell: "/bin/bash"
+        groups: sudo
+        append: yes
+        state: present
+        create_home: yes
