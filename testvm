@@ -2,16 +2,16 @@
 - hosts: all
   become: yes
   tasks:
-- name: Create a VM from a template
-    vmware_guest:
-      hostname: "{{ vcenter_ip }}"
-      username: "{{ vcenter_username }}"
-      password: "{{ vcenter_password }}"
-      validate_certs: False
-      name: testvm_2
-      template: Template_Windows_SRV2022_Local
-      datacenter: "{{ datacenter_name }}"
-      folder: /deployed_vm
-      state: poweredon
-      cluster: "{{ cluster_name }}"
-      wait_for_ip_address: yes
+    - name: Create a VM from a template
+          vmware_guest:
+          hostname: "{{ vcenter_ip }}"
+          username: "{{ vcenter_username }}"
+          password: "{{ vcenter_password }}"
+          validate_certs: False
+          name: testvm_2
+          template: Template_Windows_SRV2022_Local
+          datacenter: "{{ datacenter_name }}"
+          folder: /deployed_vm
+          state: poweredon
+          cluster: "{{ cluster_name }}"
+          wait_for_ip_address: yes
