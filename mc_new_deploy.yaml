@@ -1,3 +1,4 @@
+---
 - name: Clone a virtual machine from Windows template and customize
   community.vmware.vmware_guest:
     hostname: "{{ vcenter_hostname }}"
