@@ -1,26 +1,27 @@
 ---
+---
 - hosts: all
   become: yes
   tasks:
     - name: Create a virtual machine from a template
-	community.vmware.vmware_guest:
+		community.vmware.vmware_guest:
 		hostname: "{{ vcenter_hostname }}"
 		username: "{{ vcenter_username }}"
 		password: "{{ vcenter_password }}"
-		folder: /deployed_vm
+		folder: /testvms
 		name: testvm_2
 		state: poweredon
-		template: Template_Windows_SRV2022_Local
+		template: template_el7
 		disk:
-		- size_gb: 60
+		- size_gb: 10
 		type: thin
-		datastore: VxRail-Virtual-SAN-Datastore-67966368-ff9e-4875-9f72-ad5aef3e42a3
+		datastore: g73_datastore
 		# Add another disk from an existing VMDK
 		- filename: "[datastore1] testvms/testvm_2_1/testvm_2_1.vmdk"
 		hardware:
-		memory_mb: 4096
-		num_cpus: 4
-		num_cpu_cores_per_socket: 2
+		memory_mb: 512
+		num_cpus: 6
+		num_cpu_cores_per_socket: 3
 		scsi: paravirtual
 		memory_reservation_lock: true
 		mem_limit: 8096
