@@ -8,3 +8,4 @@ vm_name: "test01"
 vcenter_destination_folder: "deployed_vm"
 vm_state: "poweroff"
 vm_template: "Template_Windows_SRV2022_Local"
+vcenter_cluster: VxRail-Virtual-SAN-Cluster-67966368-ff9e-4875-9f72-ad5aef3e42a3
