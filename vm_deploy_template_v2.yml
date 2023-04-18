@@ -8,24 +8,40 @@
   pre_tasks:
     - include_vars: vars.yml
   tasks:
-    - name: create folder
-      vcenter_folder:
-        hostname: "{{ vcenter_hostname }}"
-        username: "{{ vcenter_username }}"
-        password: "{{ vcenter_password }}"
-        validate_certs: "{{ vcenter_validate_certs }}"
-        datacenter_name: "{{ vcenter_datacenter }}"
-        folder_name: "{{ vcenter_destination_folder }}"
-        folder_type: vm
-        state: present
-    - name: cloneVM
-      vmware_guest:
-        hostname: "{{ vcenter_hostname }}"
-        username: "{{ vcenter_username }}"
-        password: "{{ vcenter_password }}"
-        validate_certs: "{{ vcenter_validate_certs }}"
-        datacenter: "{{ vcenter_datacenter }}"
-        cluster: "{{ vcenter_cluster }}"
-        name: "{{ vm_name }}"
-        folder: "{{ vcenter_destination_folder }}"
-        template: "{{ vm_template }}"
+- name: Create a virtual machine from a template
+  community.vmware.vmware_guest:
+    hostname: "{{ vcenter_hostname }}"
+    username: "{{ vcenter_username }}"
+    password: "{{ vcenter_password }}"
+    folder: "{{ vcenter_destination_folder }}"
+    name: "{{ vm_name }}"
+    state: poweredon
+    template: {{ vm_template }}
+    disk:
+    - size_gb: 60
+      type: thin
+      datastore: {{ vm_datastore }}
+    hardware:
+      memory_mb: 4096
+      num_cpus: 4
+      num_cpu_cores_per_socket: 2
+      scsi: paravirtual
+      memory_reservation_lock: false
+      mem_limit: 8096
+      mem_reservation: 4096
+      cpu_shares_level: "high"
+      mem_shares_level: "high"
+      cpu_limit: 8096
+      cpu_reservation: 4096
+      max_connections: 5
+      hotadd_cpu: true
+      hotremove_cpu: true
+      hotadd_memory: ture
+      version: 19 # Hardware version of virtual machine
+      boot_firmware: "efi"
+    networks:
+    - name: VM Network
+      mac: aa:bb:dd:aa:00:14
+    wait_for_ip_address: true
+  delegate_to: localhost
+  register: deploy
