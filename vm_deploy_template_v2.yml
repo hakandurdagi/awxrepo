@@ -19,24 +19,24 @@
         name: "{{ vm_name }}"
         template: "{{ vm_template }}"
         folder: "{{ vcenter_destination_folder }}"
+        hardware:
+          memory_mb: "{{ vm_memory | default(2048) }}"
+          num_cpus: "{{ vm_cpu }}"
         networks:
         - name: VM Network
-          ip: 192.168.1.100
-          netmask: 255.255.255.0
-          gateway: 192.168.1.1
-          mac: aa:bb:dd:aa:00:14
-          domain: my_domain
+          ip: "{{ ip_address }}"
+          netmask: "{{ netmask }}"
+          gateway: "{{ gateway }}"
+          domain: ozon.com.tr
           dns_servers:
-          - 192.168.1.1
-          - 192.168.1.2
-        - vlan: 1234
-          type: dhcp
+          - 10.0.0.10
+          - 10.0.0.1
         customization:
           autologon: yes
           dns_servers:
           - 192.168.1.1
           - 192.168.1.2
-          domain: my_domain
+          domain: ozon.com.tr
           password: new_vm_password
           runonce:
           - powershell.exe -ExecutionPolicy Unrestricted -File C:\Windows\Temp\ConfigureRemotingForAnsible.ps1 -ForceNewSSLCert -EnableCredSSP
