@@ -23,7 +23,7 @@
           - size_gb: "{{ disk_size | default(60) }}"
             type: "{{ provisioning }}"
             datastore: "{{ vm_datastore }}"
-         disk:
+        disk:
           - size_gb: "{{ add_disk_size | default(100) }}"
             type: "{{ add_provisioning }}"
             datastore: "{{ add_vm_datastore }}"
