@@ -25,8 +25,8 @@
             datastore: "{{ vm_datastore }}"
          disk:
           - size_gb: "{{ add_disk_size | default(100) }}"
-            type: "{{ provisioning }}"
-            datastore: "{{ vm_datastore }}"
+            type: "{{ add_provisioning }}"
+            datastore: "{{ add_vm_datastore }}"
         hardware:
           memory_mb: "{{ vm_memory | default(4096) }}"
           num_cpus: "{{ vm_cpu | default(4) }}"
