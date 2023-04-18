@@ -19,9 +19,13 @@
         name: "{{ vm_name }}"
         template: "{{ vm_template }}"
         folder: "{{ vcenter_destination_folder }}"
+        disk:
+          - size_gb: "{{ disk_size | default(60) }}"
+            type: "{{ provisioning }}"
+            datastore: "{{ vm_datastore }}"
         hardware:
-          memory_mb: "{{ vm_memory | default(2048) }}"
-          num_cpus: "{{ vm_cpu }}"
+          memory_mb: "{{ vm_memory | default(4096) }}"
+          num_cpus: "{{ vm_cpu | default(4) }}"
         networks:
         - name: VM Network
           ip: "{{ ip_address }}"
