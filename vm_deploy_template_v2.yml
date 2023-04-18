@@ -28,6 +28,9 @@
           num_cpus: "{{ vm_cpu | default(4) }}"
         networks:
         - name: VM Network
+          label: "Network adapter 1"
+          network_name: "{{ vm_datastore }}"
+          state: present
           ip: "{{ ip_address }}"
           netmask: "{{ netmask }}"
           gateway: "{{ gateway }}"
