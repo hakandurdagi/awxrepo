@@ -18,8 +18,7 @@
         cluster: "{{ vcenter_cluster }}"
         name: "{{ vm_name }}"
         template: "{{ vm_template }}"
-        folder_name: "{{ vcenter_destination_folder }}"
-        folder_type: vm
+        folder: "{{ vcenter_destination_folder }}"
         networks:
         - name: VM Network
           ip: 192.168.1.100
