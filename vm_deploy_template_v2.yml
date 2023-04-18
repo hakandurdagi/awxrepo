@@ -20,7 +20,7 @@
     disk:
     - size_gb: 60
       type: thin
-      datastore: {{ vm_datastore }}
+      datastore: "{{ vm_datastore }}"
     hardware:
       memory_mb: 4096
       num_cpus: 4
