@@ -1,11 +1,6 @@
 ---
-vcenter_hostname: "vxvcenter.ozon.com.tr"
 vcenter_datacenter: "VxRail-Datacenter"
 vcenter_validate_certs: false
-vcenter_username: "administrator@vsphere.local"
-vcenter_password: "DeFacto1454!!"
-vm_name: "test01"
 vcenter_destination_folder: "deployed_vm"
-vm_state: "poweroff"
-vm_template: "Template_Windows_SRV2022_Local"
+vm_state: "poweron"
 vcenter_cluster: VxRail-Virtual-SAN-Cluster-67966368-ff9e-4875-9f72-ad5aef3e42a3
