@@ -39,4 +39,4 @@
           password: new_vm_password
           runonce:
           - powershell.exe -ExecutionPolicy Unrestricted -File C:\Windows\Temp\ConfigureRemotingForAnsible.ps1 -ForceNewSSLCert -EnableCredSSP
-  delegate_to: localhost
+    delegate_to: localhost
