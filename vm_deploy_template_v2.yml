@@ -13,35 +13,37 @@
     hostname: "{{ vcenter_hostname }}"
     username: "{{ vcenter_username }}"
     password: "{{ vcenter_password }}"
-    folder: "{{ vcenter_destination_folder }}"
-    name: "{{ vm_name }}"
+    validate_certs: no
+    folder: /deployed_vm
+    name: testvm_2
     state: poweredon
     template: "{{ vm_template }}"
     disk:
     - size_gb: 60
       type: thin
-      datastore: "{{ vm_datastore }}"
+      datastore: VxRail-Virtual-SAN-Datastore-67966368-ff9e-4875-9f72-ad5aef3e42a3
     hardware:
-      memory_mb: 4096
-      num_cpus: 4
-      num_cpu_cores_per_socket: 2
+      memory_mb: 2048
+      num_cpus: 2
+      num_cpu_cores_per_socket: 1
       scsi: paravirtual
-      memory_reservation_lock: false
+      memory_reservation_lock: True
       mem_limit: 8096
       mem_reservation: 4096
-      cpu_shares_level: "high"
-      mem_shares_level: "high"
       cpu_limit: 8096
       cpu_reservation: 4096
       max_connections: 5
-      hotadd_cpu: true
-      hotremove_cpu: true
-      hotadd_memory: ture
+      hotadd_cpu: True
+      hotremove_cpu: True
+      hotadd_memory: False
       version: 19 # Hardware version of virtual machine
       boot_firmware: "efi"
+    cdrom:
+      type: iso
+      iso_path: "[datastore1] livecd.iso"
     networks:
     - name: VM Network
       mac: aa:bb:dd:aa:00:14
-    wait_for_ip_address: true
+    wait_for_ip_address: yes
   delegate_to: localhost
   register: deploy
