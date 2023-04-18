@@ -1,5 +1,4 @@
 ---
-- name: deploy vm from template demo
   hosts: localhost
   become: false
   gather_facts: false
