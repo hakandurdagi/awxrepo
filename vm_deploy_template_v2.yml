@@ -1,4 +1,5 @@
 ---
+- name: Create a virtual machine from a template
   hosts: localhost
   become: false
   gather_facts: false
