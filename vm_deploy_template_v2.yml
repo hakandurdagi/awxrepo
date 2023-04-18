@@ -36,9 +36,6 @@
           - 10.0.0.10
           - 10.0.0.1
         customization:
-          domainadmin: "{{ dusername }}"
-          domainadminpassword: "{{ dpassword }}"
-          joindomain: "{{ bnetworks.domain }}"
           hostname: "{{ guestos_hostname }}"
           password: "{{ root_pass }}"
         state: poweredon
