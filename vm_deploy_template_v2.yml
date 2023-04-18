@@ -46,5 +46,3 @@
           password: "{{ root_pass }}"
         state: poweredon
         wait_for_ip_address: yes
-        runonce:
-          - powershell.exe -ExecutionPolicy Unrestricted -File C:\Windows\Temp\ConfigureRemotingForAnsible.ps1 -ForceNewSSLCert -EnableCredSSP
