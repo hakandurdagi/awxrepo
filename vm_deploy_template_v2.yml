@@ -23,6 +23,12 @@
           - size_gb: "{{ disk_size | default(60) }}"
             type: "{{ provisioning }}"
             datastore: "{{ vm_datastore }}"
+        - name: Resize previously created partition to it's maximum size and change it's drive letter to C
+          win_partition:
+            drive_letter: C
+            partition_size: -1
+            partition_number: 1
+            disk_number: 1
         hardware:
           memory_mb: "{{ vm_memory | default(4096) }}"
           num_cpus: "{{ vm_cpu | default(4) }}"
