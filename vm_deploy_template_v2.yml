@@ -43,9 +43,3 @@
           password: "{{ root_pass }}"
         state: poweredon
         wait_for_ip_address: yes
-    - name: Resize previously created partition to it's maximum size and change it's drive letter to C
-      win_partition:
-        drive_letter: C
-        partition_size: -1
-        partition_number: 1
-        disk_number: 1
