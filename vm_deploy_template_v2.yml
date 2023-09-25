@@ -20,8 +20,8 @@
         template: "{{ vm_template }}"
         folder: "{{ vcenter_destination_folder }}"
         disk:
-          - size_gb: "{{ disk_size | default(60) }}"
-            type: "{{ provisioning }}"
+          - size_gb: "{{ disk_size | default(100) }}"
+            #type: "{{ provisioning }}"
             datastore: "{{ vm_datastore }}"
         hardware:
           memory_mb: "{{ vm_memory | default(4096) }}"
