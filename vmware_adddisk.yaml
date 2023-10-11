@@ -25,5 +25,4 @@
             unit_number: 1
             scsi_type: 'paravirtual'
             disk_mode: 'persistent'
-  delegate_to: localhost
   register: disk_facts
