@@ -1,6 +1,6 @@
 ---
 - name: Create a virtual machine add Disk
-- hosts: localhost
+  hosts: localhost
   collections:
     - community.vmware
   become: false
