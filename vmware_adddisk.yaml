@@ -5,13 +5,13 @@
   pre_tasks:
     - include_vars: vars.yml
   tasks:
-- name: Add disks to virtual machine using name
-  vmware_guest:
-    hostname: "{{ vcenter_hostname }}"
-    username: "{{ vcenter_username }}"
-    password: "{{ vcenter_password }}"
-    datacenter: "{{ vcenter_datacenter }}"
-    name: "{{ name }}"
+    - name: Add disks to virtual machine using name
+      vmware_guest:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        datacenter: "{{ vcenter_datacenter }}"
+        name: "{{ name }}"
   community.vmware.vmware_guest_disk:
     disk:
       - size_mb: "{{ size }}"
