@@ -1,6 +1,5 @@
 ---
 - name: Create a virtual machine add Disk
-  hosts: inventory
   collections:
     - community.vmware
   become: false
