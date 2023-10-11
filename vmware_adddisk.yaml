@@ -3,6 +3,8 @@
 - hosts: localhost
   collections:
     - community.vmware
+  become: false
+  gather_facts: false
   pre_tasks:
     - include_vars: vars.yml
   tasks:
