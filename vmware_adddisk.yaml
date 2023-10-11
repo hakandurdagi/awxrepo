@@ -1,19 +1,13 @@
 ---
 - hosts: localhost
-  collections:
-    - community.vmware
-  become: false
-  gather_facts: false
   pre_tasks:
     - include_vars: vars.yml
-  tasks:
 - name: Add disks to virtual machine using UUID
   community.vmware.vmware_guest_disk:
     hostname: "{{ vcenter_hostname }}"
     username: "{{ vcenter_username }}"
     password: "{{ vcenter_password }}"
     datacenter: "{{ vcenter_datacenter }}"
-    validate_certs: no
     name: "{{ name }}"
     disk:
       - size_mb: "{{ size }}"
@@ -23,5 +17,6 @@
         scsi_controller: 1
         unit_number: 1
         scsi_type: 'paravirtual'
+        disk_mode: 'persistent'
   delegate_to: localhost
   register: disk_facts
