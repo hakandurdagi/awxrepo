@@ -1,5 +1,7 @@
 ---
 - hosts: localhost
+  collections:
+    - community.vmware
   pre_tasks:
     - include_vars: vars.yml
 - name: Add disks to virtual machine using name
