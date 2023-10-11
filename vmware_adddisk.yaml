@@ -1,6 +1,6 @@
 ---
 - name: Create a virtual machine add Disk
-  hosts: "{{ name }}"
+  hosts: inventory
   collections:
     - community.vmware
   become: false
