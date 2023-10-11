@@ -2,7 +2,7 @@
 - hosts: localhost
   pre_tasks:
     - include_vars: vars.yml
-- name: Add disks to virtual machine using UUID
+- name: Add disks to virtual machine using Name
   community.vmware.vmware_guest_disk:
     hostname: "{{ vcenter_hostname }}"
     username: "{{ vcenter_username }}"
