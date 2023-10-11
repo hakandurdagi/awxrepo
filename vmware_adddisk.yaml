@@ -3,7 +3,7 @@
     hostname: "{{ vcenter_hostname }}"
     username: "{{ vcenter_username }}"
     password: "{{ vcenter_password }}"
-    datacenter: "{{ datacenter_name }}"
+    datacenter: "{{ vcenter_datacenter }}"
     validate_certs: no
     uuid: 421e4592-c069-924d-ce20-7e7533fab926
     disk:
