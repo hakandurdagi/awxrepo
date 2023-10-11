@@ -20,8 +20,8 @@
           - size_gb: "{{ vm_disk_gb | int }}"
             type: "{{ vm_disk_type }}"
             datastore: "{{ vm_disk_datastore }}"
-            state: present
+            state: absent
             scsi_controller: "{{ vm_disk_scsi_controller | int }}"
             unit_number: "{{ vm_disk_scsi_unit | int }}"
-            scsi_type: state
+            scsi_type: "{{ vm_disk_scsi_type | int }}"
             disk_mode: "{{ vm_disk_mode }}"
