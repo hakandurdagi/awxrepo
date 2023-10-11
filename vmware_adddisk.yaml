@@ -5,20 +5,20 @@
   pre_tasks:
     - include_vars: vars.yml
 - name: Add disks to virtual machine using name
-    community.vmware.vmware_guest_disk:
-      hostname: "{{ vcenter_hostname }}"
-      username: "{{ vcenter_username }}"
-      password: "{{ vcenter_password }}"
-      datacenter: "{{ vcenter_datacenter }}"
-      name: "{{ name }}"
-      disk:
-        - size_mb: "{{ size }}"
-          type: "{{ type }}"
-          autoselect_datastore: True
-          state: present
-          scsi_controller: 1
-          unit_number: 1
-          scsi_type: 'paravirtual'
-          disk_mode: 'persistent'
+  community.vmware.vmware_guest_disk:
+    hostname: "{{ vcenter_hostname }}"
+     username: "{{ vcenter_username }}"
+     password: "{{ vcenter_password }}"
+     datacenter: "{{ vcenter_datacenter }}"
+     name: "{{ name }}"
+     disk:
+       - size_mb: "{{ size }}"
+         type: "{{ type }}"
+         autoselect_datastore: True
+         state: present
+         scsi_controller: 1
+         unit_number: 1
+         scsi_type: 'paravirtual'
+         disk_mode: 'persistent'
   delegate_to: localhost
   register: disk_facts
