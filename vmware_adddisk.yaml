@@ -4,6 +4,7 @@
     - community.vmware
   pre_tasks:
     - include_vars: vars.yml
+  tasks:
 - name: Add disks to virtual machine using name
   vmware_guest:
     hostname: "{{ vcenter_hostname }}"
