@@ -12,15 +12,15 @@
         password: "{{ vcenter_password }}"
         datacenter: "{{ vcenter_datacenter }}"
         name: "{{ name }}"
-  community.vmware.vmware_guest_disk:
-    disk:
-      - size_mb: "{{ size }}"
-        type: "{{ type }}"
-        autoselect_datastore: True
-        state: present
-        scsi_controller: 1
-        unit_number: 1
-        scsi_type: 'paravirtual'
-        disk_mode: 'persistent'
+      community.vmware.vmware_guest_disk:
+        disk:
+          - size_mb: "{{ size }}"
+            type: "{{ type }}"
+            autoselect_datastore: True
+            state: present
+            scsi_controller: 1
+            unit_number: 1
+            scsi_type: 'paravirtual'
+            disk_mode: 'persistent'
   delegate_to: localhost
   register: disk_facts
