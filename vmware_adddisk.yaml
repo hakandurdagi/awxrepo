@@ -25,4 +25,3 @@
             unit_number: 1
             scsi_type: 'paravirtual'
             disk_mode: 'persistent'
-  register: disk_facts
