@@ -16,7 +16,7 @@
         datacenter: "{{ vcenter_datacenter }}"
         name: "{{ hosts }}"
         disk:
-          - size_mb: "{{ size }}"
+          - size_mb: "{{ Size }}"
             type: "{{ type }}"
             autoselect_datastore: True
             state: present
