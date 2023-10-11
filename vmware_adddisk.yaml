@@ -14,7 +14,7 @@
         username: "{{ vcenter_username }}"
         password: "{{ vcenter_password }}"
         datacenter: "{{ vcenter_datacenter }}"
-        name: "{{ name }}"
+        name: "{{ hosts }}"
         disk:
           - size_mb: "{{ size }}"
             type: "{{ type }}"
