@@ -1,6 +1,6 @@
 ---
 - name: Create a virtual machine add Disk
-  hosts: Ubuntu_Servers
+  hosts: "{{ hosts }}"
   collections:
     - community.vmware
   become: false
