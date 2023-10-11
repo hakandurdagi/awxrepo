@@ -25,4 +25,3 @@
             unit_number: "{{ vm_disk_scsi_unit }}"
             scsi_type: "{{ vm_disk_scsi_type }}"
             disk_mode: "{{ vm_disk_mode }}"
-            
