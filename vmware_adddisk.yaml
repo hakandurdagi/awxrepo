@@ -21,4 +21,7 @@
             type: "{{ vm_disk_type }}"
             datastore: "{{ vm_disk_datastore }}"
             state: present
+            scsi_controller: "{{ vm_disk_scsi_controller | int }}"
+            unit_number: "{{ vm_disk_scsi_unit | int }}"
+            scsi_type: "{{ vm_disk_scsi_type }}"
             disk_mode: "{{ vm_disk_mode }}"
