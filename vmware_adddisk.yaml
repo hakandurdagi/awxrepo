@@ -15,7 +15,6 @@
         password: "{{ vcenter_password }}"
         datacenter: "{{ vcenter_datacenter }}"
         name: "{{ name }}"
-      community.vmware.vmware_guest_disk:
         disk:
           - size_mb: "{{ size }}"
             type: "{{ type }}"
