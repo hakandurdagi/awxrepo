@@ -6,7 +6,7 @@ vm_state: "poweredon"
 vcenter_cluster: VxRail-Virtual-SAN-Cluster-67966368-ff9e-4875-9f72-ad5aef3e42a3
 vm_name: "vm_name"
 vm_disk_gb: "disk_size"
-vm_disk_type: "disk_type"
+vm_disk_type: "thin"
 vm_disk_datastore: "vm_datastore"
 vm_disk_scsi_controller: "scsi_controller"
 vm_disk_scsi_unit: "scsi_unit"
