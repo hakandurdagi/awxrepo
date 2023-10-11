@@ -14,7 +14,7 @@
     password: "{{ vcenter_password }}"
     datacenter: "{{ vcenter_datacenter }}"
     validate_certs: no
-    name: "{{ vm_name }}"
+    name: "{{ name }}"
     disk:
       - size_mb: "{{ size }}"
         type: "{{ type }}"
