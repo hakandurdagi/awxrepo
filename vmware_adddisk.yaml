@@ -6,6 +6,7 @@
   gather_facts: false
   pre_tasks:
     - include_vars: vars.yml
+  tasks:
 - name: Add disks to virtual machine using UUID
   vmware_guest_disk:
     hostname: "{{ vcenter_hostname }}"
