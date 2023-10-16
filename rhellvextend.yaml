@@ -1,41 +1,41 @@
 ---
-  hosts: localhost
+  hosts: CentosTest
   become: false
   gather_facts: false
-- name: install pexpect
-  command: pip3 install pexpect
-# Delete and create new partition on /dev/sda
-- name: create new partition
-  expect:
-    command: /sbin/fdisk /dev/sdc
-    responses:
-      'Command.*$':       
-        - 'n'
-        - 't'
-        - 'w'
-      'Partition number.*$': '\n' ## \n selects fdisk default choice ##
-      'Select.*$': '\n'
-      'First sector.*$': '\n'
-      'Last sector.*$': '\n'
-      'Do you want.*$': 'n' ## selects 'no' on removing LVM signature ##
-      'Hex code.*$': '08e' ## selects LVM partition type ##
-    echo: yes
-    timeout: 30
-  when: (ansible_os_family == "RedHat" and ansible_distribution_version|float >= 8)
-# Update kernel partition table
-- name: update kernel partition table
-  command: partx -u /dev/sda
+  - name: install pexpect
+    command: pip3 install pexpect
+  # Delete and create new partition on /dev/sda
+  - name: create new partition
+    expect:
+      command: /sbin/fdisk /dev/sdc
+      responses:
+        'Command.*$':       
+          - 'n'
+          - 't'
+          - 'w'
+        'Partition number.*$': '\n' ## \n selects fdisk default choice ##
+        'Select.*$': '\n'
+        'First sector.*$': '\n'
+        'Last sector.*$': '\n'
+        'Do you want.*$': 'n' ## selects 'no' on removing LVM signature ##
+        'Hex code.*$': '08e' ## selects LVM partition type ##
+      echo: yes
+      timeout: 30
+    when: (ansible_os_family == "RedHat" and ansible_distribution_version|float >= 8)
+  # Update kernel partition table
+  - name: update kernel partition table
+    command: partx -u /dev/sda
 
-# Resize VG rhel on top of PV /dev/sda2 to utilize additional free space
-- name: resize volume group
-  lvg:
-    vg: rhel
-    pvs: /dev/sda3
+  # Resize VG rhel on top of PV /dev/sda2 to utilize additional free space
+  - name: resize volume group
+    lvg:
+      vg: rhel
+      pvs: /dev/sda3
 
-# Extend logical Volume root to include additional free space
-- name: extend logical volume
-  lvol:
-    vg: cl
-    lv: root
-    resizefs: yes
-    pvs: /dev/sda3
+  # Extend logical Volume root to include additional free space
+  - name: extend logical volume
+    lvol:
+      vg: cl
+      lv: root
+      resizefs: yes
+      pvs: /dev/sda3
