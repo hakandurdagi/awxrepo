@@ -1,15 +1,12 @@
 ---
-# Install pexpect package via pip3
 - name: install pexpect
   command: pip3 install pexpect
-
 # Delete and create new partition on /dev/sda
 - name: create new partition
   expect:
     command: /sbin/fdisk /dev/sdc
     responses:
-      'Command.*$':
-        - 'd'            
+      'Command.*$':       
         - 'n'
         - 't'
         - 'w'
