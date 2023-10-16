@@ -1,4 +1,7 @@
 ---
+  hosts: localhost
+  become: false
+  gather_facts: false
 - name: install pexpect
   command: pip3 install pexpect
 # Delete and create new partition on /dev/sda
