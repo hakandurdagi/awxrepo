@@ -25,3 +25,11 @@
             unit_number: "{{ vm_disk_scsi_unit | int }}"
             scsi_type: "{{ vm_disk_scsi_type }}"
             disk_mode: "{{ vm_disk_mode }}"
+      - name: Connect to windows host and expand the drive
+        ansible.windows.win_powershell:
+          script: |
+            # Variable specifying the drive you want to extend
+            $drive_letter = "C"
+            # Script to get the partition sizes and then resize the volume
+            $size = (Get-PartitionSupportedSize -DriveLetter $drive_letter)
+            Resize-Partition -DriveLetter $drive_letter -Size $size.SizeMax
