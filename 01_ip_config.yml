@@ -7,7 +7,6 @@
   - ansible.netcommon
   tasks:
   - name: Set new IP address
-    collection.general.nmcli:
     nmcli:
       conn_name: ens192
       ifname: ens192
