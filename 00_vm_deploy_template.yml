@@ -15,11 +15,21 @@
         password: "{{ vcenter_password }}"
         validate_certs: no
         datacenter: "{{ vcenter_datacenter }}"
+        folder_name: "{{ vcenter_destination_folder }}"
+        folder_type: vm
+        state:  present
+    -name: clone VM
+     vmware_guest:
+        hostname: "{{ vcenter_hostname }}"
+        username: "{{ vcenter_username }}"
+        password: "{{ vcenter_password }}"
+        validate_certs: no
+        datacenter: "{{ vcenter_datacenter }}"
         cluster: "{{ vcenter_cluster }}"
         name: "{{ vm_name }}"
-        template: "{{ vm_template }}"
         folder: "{{ vcenter_destination_folder }}"
-        state:  poweredon
+        template: "{{ vm_template }}"
+        state: poweredon
     - name: Pause for 5Minutes to build app cache
       ansible.builtin.pause:
           seconds: 35
