@@ -1,4 +1,12 @@
 ---
+- name: Install needed network manager libs
+  ansible.builtin.package:
+     name:
+       - NetworkManager-libnm
+       - nm-connection-editor
+       - libsemanage-python
+       - policycoreutils-python
+     state: present
 - name: static ip assigning
   hosts:  10.0.7.245
   become: yes
