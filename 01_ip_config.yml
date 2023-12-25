@@ -1,4 +1,6 @@
 ---
+- hosts: 10.0.7.245
+  become: yes
 - name: install needed network manager libs
   package:
     name:
@@ -8,8 +10,6 @@
       - policycoreutils-python
     state: present
 - name: static ip assigning
-  hosts: 10.0.7.245
-  become: yes
   collections:
   - community.general
   - ansible.netcommon
