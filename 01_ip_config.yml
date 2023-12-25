@@ -3,7 +3,7 @@
   hosts:  10.0.7.245
   become: yes
   collections:
-  - community.general
+  - community.general.nmcli
   - ansible.netcommon
   tasks:
   - name: Set new IP address
