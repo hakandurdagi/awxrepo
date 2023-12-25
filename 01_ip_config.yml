@@ -3,10 +3,11 @@
   hosts:  10.0.7.245
   become: yes
   collections:
-  - community.general.nmcli
+  - community.general
   - ansible.netcommon
   tasks:
   - name: Set new IP address
+    collection.general.nmcli:
     nmcli:
       conn_name: ens160
       ifname: ens160
