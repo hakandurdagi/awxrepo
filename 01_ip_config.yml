@@ -7,7 +7,7 @@
   - ansible.netcommon
   tasks:
   - name: Set new IP address
-    ansible.posix:
+  - ansible.posix:
       conn_name: ens192
       ifname: ens192
       type: ethernet
