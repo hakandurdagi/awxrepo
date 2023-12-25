@@ -17,7 +17,7 @@
 - name: static ip assigning
   tasks:
   - name: Set new IP address
-  - nmcli:
+    nmcli:
       conn_name: ens192
       ifname: ens192
       type: ethernet
