@@ -1,10 +1,10 @@
 ---
 - name: deploy vm from template
   hosts: localhost
-  become: false
-  gather_facts: true
   collections:
     - community.vmware
+  become: false
+  gather_facts: true
   pre_task:
     - include_vars: vars.yml
   tasks:
