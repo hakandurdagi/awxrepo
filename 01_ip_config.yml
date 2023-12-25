@@ -1,8 +1,4 @@
 ---
-- name: Install collection community.general
-  community.general.ansible_galaxy_install:
-    type: collection
-    name: community.general
 - name: static ip assigning
   hosts:  10.0.7.245
   become: yes
