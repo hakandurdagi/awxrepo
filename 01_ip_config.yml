@@ -3,11 +3,11 @@
   hosts: 10.0.7.245
   become: yes
   collections:
-  - ansible.posix
+  - community.general
   - ansible.netcommon
   tasks:
   - name: Set new IP address
-    nmcli:
+    ansible.posix:
       conn_name: ens192
       ifname: ens192
       type: ethernet
