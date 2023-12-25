@@ -1,11 +1,11 @@
 ---
-- name: deploy vm from template
+- name: Create a virtual machine from a template
   hosts: localhost
   collections:
     - community.vmware
   become: false
-  gather_facts: true
-  pre_task:
+  gather_facts: false
+  pre_tasks:
     - include_vars: vars.yml
   tasks:
     - name: create folder
