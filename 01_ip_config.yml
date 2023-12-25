@@ -1,4 +1,7 @@
 ---
+- hosts: 10.0.7.245
+  tasks:
+  become: yes
 - name: Install needed network manager libs
   ansible.builtin.package:
      name:
@@ -8,10 +11,8 @@
        - policycoreutils-python
      state: present
 - name: static ip assigning
-  hosts:  10.0.7.245
-  become: yes
   collections:
-  - community.general.nmcli
+  - community.general
   - ansible.netcommon
   tasks:
   - name: Set new IP address
