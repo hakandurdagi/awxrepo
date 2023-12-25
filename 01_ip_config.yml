@@ -15,9 +15,6 @@
       - policycoreutils-python
 
 - name: static ip assigning
-  collections:
-  - community.general
-  - ansible.netcommon
   tasks:
   - name: Set new IP address
   - nmcli:
