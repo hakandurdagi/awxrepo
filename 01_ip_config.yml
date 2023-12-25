@@ -20,12 +20,12 @@
   - ansible.netcommon
   tasks:
   - name: Set new IP address
-    nmcli:
+  - nmcli:
       conn_name: ens192
       ifname: ens192
       type: ethernet
-      ipv4: "{{ vm_ip }}/16"
-      gw4:  10.0.0.2
+      ip4: "{{ vm_ip }}/16"
+      gw4: 10.0.0.2
       state: present
   - name: restart vlan interfaces
     command: bash -c  "ifdown ens192  ifup ens192"
