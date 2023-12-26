@@ -7,4 +7,4 @@
   - ansible.netcommon
   tasks:
     - name: Set new IP address using nmcli command
-       ansible.builtin.shell: nmcli con show
+      ansible.builtin.shell: nmcli con show
