@@ -1,6 +1,6 @@
 ---
 - name: static ip assigning
-  hosts: localhost
+  hosts: 10.0.7.245
   become: yes
   collections:
     - community.general
