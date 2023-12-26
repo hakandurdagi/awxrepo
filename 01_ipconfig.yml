@@ -1,19 +1,11 @@
 ---
 - name: static ip assigning
-  hosts: 10.0.7.245
+  hosts: localhost
   become: yes
   collections:
     - community.general
     - ansible.netcommon
   tasks:
     - name: Set new IP address using nmcli module
-      nmcli:
-        conn_name: ens192
-        ifname: ens192
-        type: ethernet
-        ipv4: "{{ vm_ip }}/16"
-        gw4: 10.0.0.2
-        state: present
-
-    - name: Restart vlan interfaces
-      command: bash -c "ifdown ens192 && ifup ens192"
+      community.general.nmcli:
+        conn_name: ens192
