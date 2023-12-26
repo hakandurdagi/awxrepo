@@ -8,7 +8,7 @@
   tasks:
  #- name: Set new IP address
   - name: Set new IP address using nmcli command
-      command: nmcli con show ens192
+      ansible.builtin.shell: nmcli con show ens192
       register: nmcli_output
     # ansible.builtin.nmcli:
     #  conn_name: ens192
