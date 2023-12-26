@@ -1,11 +1,21 @@
 ---
-- name: static ip assigning
-  hosts: localhost
+- name: Set new IP address without using nmcli module
+  hosts: 10.0.7.240
   become: yes
-  collections:
-    - community.general
-    - ansible.netcommon
   tasks:
-    - name: Set new IP address using nmcli module
-      community.general.nmcli:
-        conn_name: ens192
+    - name: Run nmcli con show command
+      ansible.builtin.shell:
+        cmd: nmcli con show ens192
+      register: nmcli_output
+
+    - debug:
+        var: nmcli_output.stdout_lines
+
+    - name: Set new IP address using shell command
+      ansible.builtin.shell:
+        cmd: nmcli con mod ens192 ipv4.address "{{ vm_ip }}/16" ipv4.gateway 10.0.0.2
+      when: "'{{ vm_ip }}/16' not in nmcli_output.stdout_lines"
+
+    - name: Restart vlan interfaces
+      ansible.builtin.shell:
+        cmd: bash -c "ifdown ens192 && ifup ens192"
