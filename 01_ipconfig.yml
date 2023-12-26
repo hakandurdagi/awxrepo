@@ -6,10 +6,14 @@
     - community.general
     - ansible.netcommon
   tasks:
-    - name: Set new IP address using nmcli command
-      ansible.builtin.shell:
-        cmd: nmcli con show ens192
-      register: nmcli_output
+    - name: Set new IP address using nmcli module
+      community.general.nmcli:
+        conn_name: ens192
+        ifname: ens192
+        type: ethernet
+        ipv4: "{{ vm_ip }}/16"
+        gw4: 10.0.0.2
+        state: present
 
-    - debug:
-        var: nmcli_output.stdout_lines
+    - name: Restart vlan interfaces
+      command: bash -c "ifdown ens192 && ifup ens192"
