@@ -1,10 +1,15 @@
 ---
 - name: static ip assigning
-  hosts: 10.0.7.245
+  hosts: localhost
   become: yes
   collections:
-  - community.general
-  - ansible.netcommon
+    - community.general
+    - ansible.netcommon
   tasks:
     - name: Set new IP address using nmcli command
-      ansible.builtin.shell: nmcli con show
+      ansible.builtin.shell:
+        cmd: nmcli con show ens192
+      register: nmcli_output
+
+    - debug:
+        var: nmcli_output.stdout_lines
