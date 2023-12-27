@@ -8,8 +8,8 @@
         cmd: nmcli con show {{ ifname }}
       register: nmcli_output
 
-    - debug:
-        var: nmcli_output.stdout_lines
+    #- debug:
+    #    var: nmcli_output.stdout_lines
 
     - name: Set new IP address using shell command
       ansible.builtin.shell:
