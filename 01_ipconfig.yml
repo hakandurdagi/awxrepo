@@ -3,21 +3,19 @@
   hosts: "{{ hosts }}"
   become: yes
   tasks:
-    #- name: Run nmcli con show command
-    #  ansible.builtin.shell:
-    #    cmd: nmcli con show {{ ifname }}
-    #  register: nmcli_output
+    - name: Run nmcli con show command
+      ansible.builtin.shell:
+        cmd: nmcli con show {{ ifname }}
+      register: nmcli_output
 
-    #- debug:
-    #    var: nmcli_output.stdout_lines
+    - debug:
+        var: nmcli_output.stdout_lines
 
     - name: Set new IP address using shell command
       ansible.builtin.shell:
-        cmd: nmcli con mod {{ ifname }} ipv4.address {{ vm_ip }}/16 ipv4.gateway 10.0.0.2 && nmcli conn down {{ ifname }} && nmcli conn up {{ ifname }}
+        cmd: nmcli con mod {{ ifname }} ipv4.address {{ vm_ip }}/16 ipv4.gateway 10.0.0.2
 
-    #- name: Restart vlan interfaces
-    #  ansible.builtin.shell:
-    #    cmd: bash -c "nmcli conn down {{ ifname }} && nmcli conn up {{ ifname }}"
     - name: Restart vlan interfaces
       ansible.builtin.shell:
-        cmd: bash -c "systemctl restart NetworkManager"
+        cmd: nmcli conn down {{ ifname }} && nmcli conn up {{ ifname }}
+        cmd bash -c "systemctl restart NetworkManager"
