@@ -13,4 +13,4 @@
 
     - name: Set new IP address using shell command
       ansible.builtin.shell:
-        cmd: nmcli con mod {{ ifname }} ipv4.address {{ vm_ip }}/16 ipv4.gateway 10.0.0.2 ; nmcli device reapply {{ ifname }}
+        cmd: nmcli con mod {{ ifname }} ipv4.address {{ vm_ip }}/16 ipv4.gateway 10.0.0.2 ; nmcli device reapply ens192
