@@ -17,4 +17,4 @@
 
     - name: Restart vlan interfaces
       ansible.builtin.shell:
-        cmd: nmcli connection down {{ ifname }} && nmcli connection up {{ ifname }}
+        cmd: /etc/init.d/network-manager force-reload
