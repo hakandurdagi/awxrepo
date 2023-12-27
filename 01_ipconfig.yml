@@ -18,5 +18,5 @@
     - name: Restart vlan interfaces
       ansible.builtin.shell:
         cmd: nmcli conn down {{ ifname }} && nmcli conn up {{ ifname }}
-      ansible.builtin.meta: end_host
+    - meta: end_play
       #when: "'{{ vm_ip }}/16' not in nmcli_output.stdout_lines"
