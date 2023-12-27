@@ -14,7 +14,3 @@
     - name: Set new IP address using shell command
       ansible.builtin.shell:
         cmd: nmcli con mod {{ ifname }} ipv4.address {{ vm_ip }}/16 ipv4.gateway 10.0.0.2 connection.autoconnect yes
-
-    - name: Restart vlan interfaces
-      ansible.builtin.shell:
-        cmd: /etc/init.d/network-manager force-reload
