@@ -17,7 +17,7 @@
 
     - name: Restart vlan interfaces
       ansible.builtin.shell:
-        cmd: nmcli connection down ens192 && nmcli connection up ens192
+        cmd: sudo nmcli connection down ens192 && sudo nmcli connection up ens192
       register: nmcli_output
 
     - debug:
