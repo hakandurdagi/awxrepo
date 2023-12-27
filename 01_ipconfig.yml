@@ -13,7 +13,7 @@
 
     - name: Set new IP address using shell command
       ansible.builtin.shell:
-        cmd: nmcli con mod ens192 ipv4.address 10.0.7.246/16 ipv4.gateway 10.0.0.2
+        cmd: nmcli con mod ens192 ipv4.address {{ vm_ip }}/16 ipv4.gateway 10.0.0.2
 
     - name: Restart vlan interfaces
       ansible.builtin.shell:
