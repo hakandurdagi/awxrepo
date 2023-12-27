@@ -1,0 +1,8 @@
+---
+- name: Set new IP address without using nmcli module
+  hosts: "{{ hosts }}"
+  become: yes
+  tasks:
+    - name: Restart vlan interfaces
+      ansible.builtin.shell:
+        cmd: nmcli conn down {{ ifname }} && nmcli conn up {{ ifname }}
