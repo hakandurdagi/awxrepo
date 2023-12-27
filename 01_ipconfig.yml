@@ -15,7 +15,5 @@
       ansible.builtin.shell:
         cmd: nmcli con mod {{ ifname }} ipv4.address {{ vm_ip }}/16 ipv4.gateway 10.0.0.2
 
-    - name: Restart nmcli conn
-      ansible.builtin.shell:
-        cmd: nmcli conn down {{ ifname }} && nmcli conn up {{ ifname }}
-        when: item.changed == true
+    - name: Unconditionally reboot the machine with all defaults
+      ansible.builtin.reboot:
