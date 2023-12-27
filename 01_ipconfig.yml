@@ -18,4 +18,7 @@
     - name: Restart vlan interfaces
       ansible.builtin.shell:
         cmd: nmcli conn down {{ ifname }} && nmcli conn up {{ ifname }}
-        state: present
+    - debug: msg="one"
+    - meta: end_play
+      when: True
+    - debug: msg="two"
