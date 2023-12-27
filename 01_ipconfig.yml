@@ -18,4 +18,6 @@
     - name: Restart vlan interfaces
       ansible.builtin.shell:
         cmd: bash -c "nmcli conn down {{ ifname }} && nmcli conn up {{ ifname }}"
+    - name: Restart vlan interfaces
+      ansible.builtin.shell:
         cmd: bash -c "systemctl restart NetworkManager"
