@@ -17,5 +17,4 @@
 
     - name: reboot and wait
       ansible.builtin.reboot:
-        reboot_timeout: 1
-      become: true
+        reboot_timeout: 0
