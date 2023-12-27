@@ -18,3 +18,4 @@
     - name: Restart vlan interfaces
       ansible.builtin.shell:
         cmd: bash -c "nmcli conn down ens192 && nmcli conn up ens192"
+        cmd: bash -c "systemctl restart NetworkManager"
