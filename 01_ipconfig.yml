@@ -1,6 +1,6 @@
 ---
 - name: Set new IP address without using nmcli module
-  hosts: {{ hosts }}
+  hosts: "{{ hosts }}"
   become: yes
   tasks:
     - name: Run nmcli con show command
