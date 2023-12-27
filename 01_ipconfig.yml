@@ -17,4 +17,4 @@
 
     - name: Restart vlan interfaces
       ansible.builtin.shell:
-        cmd: bash -c ifdown ens192 && ifup ens192
+        cmd: nmcli conn down ens192 && nmcli con up ens192
