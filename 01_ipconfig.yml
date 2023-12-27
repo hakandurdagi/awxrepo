@@ -18,4 +18,12 @@
     - name: Restart vlan interfaces
       ansible.builtin.shell:
         cmd: nmcli conn down {{ ifname }} && nmcli conn up {{ ifname }}
-        cmd: systemctl restart NetworkManager
+
+- name: Connection to NEW IP
+  hosts: "{{ vm_ip }}"
+  become: yes
+  tasks:
+    - name: Run nmcli con show command
+      ansible.builtin.shell:
+        cmd: nmcli con show {{ ifname }}
+      register: nmcli_output
