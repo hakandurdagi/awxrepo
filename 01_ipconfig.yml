@@ -17,4 +17,4 @@
 
     - name: Restart nmcli conn
       ansible.builtin.command:
-        cmd: bash -c "nmcli connection down ens192 && nmcli connection up ens192"
+        cmd: /tmp/./ifdownup.sh
