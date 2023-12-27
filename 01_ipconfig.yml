@@ -3,10 +3,10 @@
   hosts: "{{ hosts }}"
   become: yes
   tasks:
-    - name: Run nmcli con show command
-      ansible.builtin.shell:
-        cmd: nmcli con show {{ ifname }}
-      register: nmcli_output
+    #- name: Run nmcli con show command
+    #  ansible.builtin.shell:
+    #    cmd: nmcli con show {{ ifname }}
+    #  register: nmcli_output
 
     #- debug:
     #    var: nmcli_output.stdout_lines
