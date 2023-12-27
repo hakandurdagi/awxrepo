@@ -18,4 +18,4 @@
     - name: Restart vlan interfaces
       ansible.builtin.shell:
         cmd: nmcli conn down {{ ifname }} && nmcli conn up {{ ifname }}
-       when: ipv4.addresses is not defined
+        when: ipv4.addresses is not defined
