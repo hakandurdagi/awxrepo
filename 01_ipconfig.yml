@@ -18,7 +18,7 @@
     - name: Restart vlan interfaces
       ansible.builtin.shell:
         cmd: nmcli conn down {{ ifname }} && nmcli conn up {{ ifname }}
-      when: "'{{ vm_ip }}' not in nmcli_output.stdout_lines"
+      when: "{{ vm_ip }} not in nmcli_output.stdout_lines"
       
     - name: Restart Service NetworkManager
       ansible.builtin.shell:
