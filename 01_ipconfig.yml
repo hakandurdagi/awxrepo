@@ -15,9 +15,6 @@
       ansible.builtin.shell:
         cmd: nmcli con mod {{ ifname }} ipv4.address {{ vm_ip }}/16 ipv4.gateway 10.0.0.2
 
-    - name: Restart vlan interfaces
-      ansible.builtin.shell:
-        cmd: sudo nmcli connection down ens192 && sudo nmcli connection up ens192
-      ansible.builtin.skipped:
-      # test 'status' to know how to respond
-       {{ taskresults is skipped }}
+    - name: Restart nmcli conn
+      ansible.builtin.command:
+        cmd: bash -c "nmcli connection down ens192 && nmcli connection up ens192"
