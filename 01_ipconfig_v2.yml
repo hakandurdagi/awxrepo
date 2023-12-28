@@ -5,14 +5,14 @@
   - name: sleep
     command: sleep 600
 
-  - name: Set new IP address
-    community.general.nmcli:
-      conn_name: "{{ ifname }}"
-      ifname: "{{ ifname }}"
-      type: ethernet
-      ipv4: "{{ vm_ip }}/16"
-      gw4:  10.0.0.2
-      state: present
-  - name: restart vlan interfaces
-    command: bash -c  "ifdown {{ ifname }}  ifup {{ ifname }}"
+  #- name: Set new IP address
+  #  community.general.nmcli:
+  #    conn_name: "{{ ifname }}"
+  #    ifname: "{{ ifname }}"
+  #    type: ethernet
+  #    ipv4: "{{ vm_ip }}/16"
+  #    gw4:  10.0.0.2
+  #    state: present
+  #- name: restart vlan interfaces
+  #  command: bash -c  "ifdown {{ ifname }}  ifup {{ ifname }}"
 
