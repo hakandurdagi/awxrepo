@@ -1,5 +1,5 @@
 - name: static ip assigning
-  hosts: "{{ hosts }}"
+  hosts: localhost
   become: yes
   tasks:
   #- name: Set new IP address
