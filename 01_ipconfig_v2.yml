@@ -12,4 +12,4 @@
       gw4:  10.0.0.2
       state: present
   - name: restart vlan interfaces
-    command: bash -c  "ifdown {{ ifname }}  ifup {{ ifname }}"
+    command: bash -c  "nmcli down {{ ifname }}  nmcli up {{ ifname }}"
