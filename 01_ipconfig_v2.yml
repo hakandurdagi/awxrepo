@@ -1,5 +1,5 @@
 - name: static ip assigning
-  hosts: localhost
+  hosts: "{{ hosts }}"
   become: yes
   tasks:
 
@@ -13,4 +13,3 @@
       state: present
   - name: restart vlan interfaces
     command: bash -c  "ifdown {{ ifname }}  ifup {{ ifname }}"
-
