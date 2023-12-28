@@ -11,5 +11,5 @@
       ip4: "{{ vm_ip }}/16"
       gw4:  10.0.0.2
       state: present
-  #- name: restart vlan interfaces
-      shell: nmcli conn down {{ ifname }} ; nmcli conn up {{ ifname }}
+  - name: restart vlan interfaces
+    shell: nmcli conn down {{ ifname }} ; nmcli conn up {{ ifname }}
