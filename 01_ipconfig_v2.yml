@@ -1,6 +1,6 @@
 - name: static ip assigning
   hosts: localhost
-  become: yes
+  become: no
   tasks:
   #- name: Set new IP address
   #  community.general.nmcli:
