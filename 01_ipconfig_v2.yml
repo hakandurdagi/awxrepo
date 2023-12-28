@@ -13,3 +13,4 @@
       state: present
   - name: restart vlan interfaces
     shell: nmcli conn down {{ ifname }} ; nmcli conn up {{ ifname }}
+    ignore_errors: true
