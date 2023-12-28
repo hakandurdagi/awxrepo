@@ -1,0 +1,18 @@
+---
+- name: static ip assigning
+  hosts:  10.0.7.240
+  become: yes
+  collections:
+  - community.general
+  - ansible.netcommon
+  tasks:
+  - name: Set new IP address
+    nmcli:
+      conn_name: ens160
+      ifname: ens160
+      type: ethernet
+      ipv4: "{{ vm_ip }}/16"
+      gw4:  10.0.0.2
+      state: present
+  - name: restart vlan interfaces
+    command: bash -c  "ifdown ens160  ifup ens160"
