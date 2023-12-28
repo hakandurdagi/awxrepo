@@ -1,6 +1,6 @@
 ---
 - name: static ip assigning
-  hosts:  10.0.7.240
+  hosts:  {{ hosts }}
   become: yes
   collections:
   - community.general
@@ -8,11 +8,11 @@
   tasks:
   - name: Set new IP address
     nmcli:
-      conn_name: ens160
-      ifname: ens160
+      conn_name: {{ ifname }}
+      ifname: {{ ifname }
       type: ethernet
       ipv4: "{{ vm_ip }}/16"
       gw4:  10.0.0.2
       state: present
   - name: restart vlan interfaces
-    command: bash -c  "ifdown ens160  ifup ens160"
+    command: bash -c  "ifdown {{ ifname }}  ifup {{ ifname }}"
