@@ -14,4 +14,4 @@
   #  command: bash -c  "ifdown {{ ifname }}  ifup {{ ifname }}"
 
   - name: sleep
-    command: sleep 300
+    command: sleep 600
