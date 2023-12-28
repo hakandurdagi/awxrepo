@@ -8,8 +8,8 @@
   tasks:
   - name: Set new IP address
     nmcli:
-      conn_name: {{ ifname }}
-      ifname: {{ ifname }}
+      conn_name: "{{ ifname }}"
+      ifname: "{{ ifname }}"
       type: ethernet
       ipv4: "{{ vm_ip }}/16"
       gw4:  10.0.0.2
