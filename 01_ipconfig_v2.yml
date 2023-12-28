@@ -1,6 +1,6 @@
 ---
 - name: static ip assigning
-  hosts:  {{ hosts }}
+  hosts: {{ hosts }}
   become: yes
   collections:
   - community.general
