@@ -2,12 +2,9 @@
 - name: static ip assigning
   hosts: "{{ hosts }}"
   become: yes
-  collections:
-  - community.general
-  - ansible.netcommon
   tasks:
   - name: Set new IP address
-    nmcli:
+    community.general.nmcli:
       conn_name: "{{ ifname }}"
       ifname: "{{ ifname }}"
       type: ethernet
