@@ -13,6 +13,8 @@
       state: present
   - name: restart vlan interfaces
     shell: nmcli conn down {{ ifname }} ; nmcli conn up {{ ifname }}
+
+  - name: restart nmcli service
     shell: nmcli device reapply {{ ifname }}
     ignore_errors: true
     delegate_to: 10.0.7.241
