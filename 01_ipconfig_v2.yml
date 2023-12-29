@@ -13,11 +13,11 @@
       state: present
   
   - name: change ip interfaces
-    cmd: nmcli conn down {{ ifname }} ; nmcli conn up {{ ifname }}
-    state: present
+     cmd: nmcli conn down {{ ifname }} ; nmcli conn up {{ ifname }}
+     state: present
 
   - name: restart nmcli service
-    cmd: nmcli device reapply {{ ifname }}
-    state: down
-    ignore_errors: true
-    delegate_to: 10.0.7.241
+     cmd: nmcli device reapply {{ ifname }}
+     state: down
+     ignore_errors: true
+     delegate_to: 10.0.7.241
